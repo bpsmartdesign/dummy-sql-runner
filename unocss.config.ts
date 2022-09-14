@@ -28,6 +28,13 @@ export default defineConfig({
       },
     }),
   ],
+  theme: {
+    // ...
+    breakpoints: {
+      sm: '320px',
+      md: '640px',
+    },
+  },
   // transformers: [
   //   transformerDirectives(),
   //   transformerVariantGroup(),
