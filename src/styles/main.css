@@ -7,5 +7,10 @@ body,
 }
 
 html.dark {
-  background: #1f2023;
+  background: #181818;
+}
+
+.el--shadow_lg {
+  box-shadow: rgba(50, 50, 93, 0.1) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.12) 0px 18px 36px -18px;
 }
