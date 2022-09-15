@@ -5,7 +5,7 @@ import { ref } from 'vue'
  * The Database column data type.
  * @author BIYA Paul <bpsmartdesign@hotmail.com>
  */
-interface DBColumn {
+export interface DBColumn {
   label: string
   type: string
   length?: number
@@ -15,7 +15,7 @@ interface DBColumn {
  * The Database Table data type.
  * @author BIYA Paul <bpsmartdesign@hotmail.com>
  */
-interface DBTable {
+export interface DBTable {
   name: string
   tableView: boolean
   columns: DBColumn[]
@@ -62,60 +62,36 @@ const _tables = ref<DBTable[]>([
     ],
   },
 ])
+
+const getRandomTable = () => _tables.value[~~(Math.random() * _tables.value.length)]
 </script>
 
 <template>
   <div sm:block md:flex class="el--main_container" style="height: 92vh">
     <main sm:w-full h-full class="md:w-3/5">
-      <section>
+      <section style="height: 55vh" bg-red-9 px-8 py-4>
         <h3>Add SQL query</h3>
       </section>
+      <section style="height: 37vh">
+        <div flex h-full items-center gap-8 px-8 py-4 dark:border-b-dark-3 border-b-gray-2 border-b border-b-solid style="height: 6vh">
+          <h3 cursor-pointer hover:border-b-solid hover:border-b>
+            Output
+          </h3>
+          <h3 sm:block md:hidden cursor-pointer hover:border-b-solid hover:border-b>
+            Current Tables
+          </h3>
+        </div>
+        <div style="height: 31vh" overflow-y-auto px-8 py-4>
+          <the-table :data="getRandomTable()" />
+          <table-list sm:block md:hidden :data="_tables" />
+        </div>
+      </section>
     </main>
-    <aside h-full dark:border-l dark:border-l-solid dark:border-l-dark-3 sm:w-full class="md:w-2/5">
+    <aside h-full border-l border-l-solid dark:border-l-dark-3 border-l-gray-2 sm:w-full class="md:w-2/5">
       <h1 dark:bg-dark-4 font-bold px-8 py-3>
         Current Tables
       </h1>
-      <div px-8 py-4>
-        <div v-for="table in _tables" :key="table.name" mb-8>
-          <h3 text-sm mb-2 flex items-center justify-between>
-            <span>
-              {{ table.name }}
-            </span>
-            <div grid grid-cols-2>
-              <button p-2 flex items-center justify-center icon-btn :class="{ 'dark:bg-dark-9 bg-gray-3 dark-text-gray-7 text-gray-8': table.tableView, 'dark:text-gray-5 text-gray-7 dark:bg-dark-7 bg-gray-1': !table.tableView }" @click="table.tableView = !table.tableView">
-                <div i-carbon-table-shortcut />
-              </button>
-              <button p-2 flex items-center justify-center icon-btn :class="{ 'dark:bg-dark-9 bg-gray-3 dark-text-gray-7 text-gray-8': !table.tableView, 'dark:text-gray-5 text-gray-7 dark:bg-dark-7 bg-gray-1': table.tableView }" @click="table.tableView = !table.tableView">
-                <div i-carbon-license-maintenance />
-              </button>
-            </div>
-          </h3>
-          <div v-if="table.tableView" overflow-x-auto>
-            <table>
-              <thead>
-                <tr>
-                  <th v-for="head in table.columns" :key="head.label" dark:border-dark-3 border-gray-2 dark:bg-dark-3 bg-gray-2>
-                    {{ head.label }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in table.values" :key="item.id">
-                  <td v-for="head in table.columns" :key="head.label" dark:border-dark-3 border-gray-2>
-                    {{ item[head.label] }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div v-else border-l border-l-solid pl-6 relative>
-            <p v-for="head in table.columns" :key="head.label" my-3 text-xs>
-              {{ head.label }}
-              <span text-orange-600>[{{ head.type }}<span v-if="head.length"> ({{ head.length }})</span>]</span>
-            </p>
-          </div>
-        </div>
-      </div>
+      <table-list :data="_tables" />
     </aside>
   </div>
 </template>
