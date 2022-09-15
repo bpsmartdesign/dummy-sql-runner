@@ -50,6 +50,10 @@ export default defineComponent({
       })
     }
 
+    const clearCommand = () => {
+      $code.value = ''
+    }
+
     const state = reactive({
       lines: null as null | number,
       cursor: null as null | number,
@@ -84,6 +88,7 @@ export default defineComponent({
       handleStateUpdate,
       handleRedo,
       handleUndo,
+      clearCommand,
     }
   },
 })
@@ -96,7 +101,10 @@ export default defineComponent({
         Input
       </h3>
       <div w-full h-full px-8 gap-2 text-sm flex justify-end items-center border-b border-b-solid dark:border-b-dark-3 border-b-gray-2 border-l border-l-solid dark:border-l-dark-3 border-l-gray-2>
-        <div grid grid-cols-2 gap-1>
+        <div grid grid-cols-3 gap-1>
+          <button p-1 flex items-center justify-center icon-btn border dark:border-solid dark:border-gray-6 dark:text-gray-6 hover:dark-bg-gray-5 hover:text-dark-9 rounded @click="clearCommand">
+            <div i-carbon-erase />
+          </button>
           <button p-1 flex items-center justify-center icon-btn border dark:border-solid dark:border-gray-6 dark:text-gray-6 hover:dark-bg-gray-5 hover:text-dark-9 rounded @click="handleUndo">
             <div i-carbon-undo />
           </button>
@@ -117,8 +125,9 @@ export default defineComponent({
           height: config.height,
           backgroundColor: isDark ? '#4a1e1e' : '#ffffff',
         }"
-        placeholder="Please enter the code."
-        mode="javascript"
+        placeholder="Please enter the SQL code."
+        mode="sql"
+        theme="oneDark"
         :autofocus="config.autofocus"
         :disabled="config.disabled"
         :indent-with-tab="config.indentWithTab"
