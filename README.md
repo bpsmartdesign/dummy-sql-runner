@@ -1,8 +1,11 @@
+## Task - Atlan Frontend Engineer
+
+Create, design and implement a web-based application capable of running SQL queries and displaying the results of said query. The application must include a space which accepts SQL queries in the form of user inputs, then runs the given query, and displays the result within the application..
+
+
 <h6 align='center'>
 <a href="https://bpsmartdesign.dummy-sql.netlify.app/">Live Demo</a>
 </h6>
-
-<br>
 
 
 ## Features
@@ -13,7 +16,6 @@
 - 🎨 [UnoCSS](https://github.com/antfu/unocss) - The instant on-demand atomic CSS engine.
 - 😃 Use icons from any icon sets in [Pure CSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 - 🔥 Use the [new `<script setup>` style](https://github.com/vuejs/rfcs/pull/227)
-- ✅ Use [Vitest](http://vitest.dev/) for unit and components testing
 - 🦾 TypeScript, of course
 - ☁️ Deploy on Netlify, zero-config
 
@@ -36,19 +38,3 @@
 - [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use Vue Composition API and others without importing
 - [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components) - components auto import
 - [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
-
-## Try it now!
-
-### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/bpsmartdesign/dummy-sql/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit bpsmartdesign/dummy-sql my-sql-runner-app
-cd my-sql-runner-app
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
-```
