@@ -64,7 +64,12 @@ const _tables = ref<DBTable[]>([
 ])
 
 const mViewOutput = ref<boolean>(true)
-const getRandomTable = () => _tables.value[~~(Math.random() * _tables.value.length)]
+const getRandomOutput = () => {
+  const randomTable = _tables.value[~~(Math.random() * _tables.value.length)]
+  const randomId = ~~(Math.random() * (randomTable.values.length)) + 1
+
+  return { ...randomTable, values: randomTable.values.slice(0, randomId) }
+}
 const setViewOutput = (val: boolean) => {
   mViewOutput.value = val
 }
@@ -73,7 +78,7 @@ const setViewOutput = (val: boolean) => {
 <template>
   <div sm:block md:flex class="el--main_container" style="height: 92vh">
     <main sm:w-full h-full class="md:w-3/5">
-      <section style="height: 55vh" bg-red-9 px-8 py-4>
+      <section style="height: 55vh" bg-red-9 text-gray-2 px-8 py-4>
         <h3>Add SQL query</h3>
       </section>
       <section style="height: 37vh">
@@ -86,11 +91,11 @@ const setViewOutput = (val: boolean) => {
           </h3>
         </div>
         <div sm:block md:hidden style="height: 31vh" overflow-y-auto px-8 py-4>
-          <the-table v-if="mViewOutput" :data="getRandomTable()" />
+          <the-table v-if="mViewOutput" :data="getRandomOutput()" />
           <table-list v-else sm:block md:hidden :data="_tables" />
         </div>
         <div sm:hidden md:block style="height: 31vh" overflow-y-auto px-8 py-4>
-          <the-table :data="getRandomTable()" />
+          <the-table :data="getRandomOutput()" />
         </div>
       </section>
     </main>
