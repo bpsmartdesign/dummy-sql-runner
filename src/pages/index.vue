@@ -61,6 +61,24 @@ const _tables = ref<DBTable[]>([
       { orderId: 5, item: '3 bred', amount: 50, categoryId: 2 },
     ],
   },
+  {
+    name: 'Clients',
+    tableView: true,
+    columns: [
+      { label: 'clientId', type: 'int' },
+      { label: 'firstName', type: 'varchar', length: 100 },
+      { label: 'lastName', type: 'varchar', length: 100 },
+      { label: 'age', type: 'integer', length: 11 },
+      { label: 'country', type: 'varchar', length: 100 },
+    ],
+    values: [
+      { clientId: 1, firstName: 'John', lastName: 'DOE', age: 23, country: 'UK' },
+      { clientId: 2, firstName: 'Janette', lastName: 'DOE', age: 19, country: 'USA' },
+      { clientId: 3, firstName: 'Elise', lastName: 'DOE', age: 16, country: 'USA' },
+      { clientId: 4, firstName: 'Ekanga', lastName: 'Alain', age: 25, country: 'CMR' },
+      { clientId: 5, firstName: 'Jordan', lastName: 'DOE', age: 32, country: 'UK' },
+    ],
+  },
 ])
 
 const mViewOutput = ref<boolean>(true)
