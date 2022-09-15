@@ -7,14 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Aside: typeof import('./src/components/Aside.vue')['default']
-    Counter: typeof import('./src/components/Counter.vue')['default']
-    CurrentTable: typeof import('./src/components/CurrentTable.vue')['default']
     Editor: typeof import('./src/components/Editor.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Table: typeof import('./src/components/Table.vue')['default']
     TableList: typeof import('./src/components/TableList.vue')['default']
     TheTable: typeof import('./src/components/TheTable.vue')['default']
   }
