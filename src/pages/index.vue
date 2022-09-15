@@ -64,7 +64,7 @@ const _tables = ref<DBTable[]>([
 ])
 
 const mViewOutput = ref<boolean>(true)
-
+const _code = ref<string>('SELECT * FROM test')
 const getRandomOutput = () => {
   const randomTable = _tables.value[~~(Math.random() * _tables.value.length)]
   const randomId = ~~(Math.random() * (randomTable.values.length)) + 1
@@ -79,11 +79,10 @@ const setViewOutput = (val: boolean) => {
 <template>
   <div sm:block md:flex class="el--main_container" style="height: 92vh">
     <main sm:w-full h-full class="md:w-3/5">
-      <section style="height: 55vh" bg-red-9 text-gray-2 px-8 py-4>
-        <h3>Add SQL query</h3>
+      <section style="height: 55vh" dark:bg-dark-4 bg-gray-3>
         <editor
           language="sql"
-          code="SELECT * FROM test"
+          :code="_code"
         />
       </section>
       <section style="height: 37vh">
@@ -105,7 +104,7 @@ const setViewOutput = (val: boolean) => {
       </section>
     </main>
     <aside h-full border-l border-l-solid dark:border-l-dark-3 border-l-gray-2 sm:w-full class="md:w-2/5">
-      <h1 dark:bg-dark-4 font-bold px-8 py-3>
+      <h1 dark:bg-dark-4 font-bold px-8 py-3 style="height: 50px">
         Current Tables
       </h1>
       <div px-8 py-4>

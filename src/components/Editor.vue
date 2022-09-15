@@ -3,10 +3,12 @@ import { defineComponent, onMounted, reactive, shallowRef, watch } from 'vue'
 import type { EditorView, ViewUpdate } from '@codemirror/view'
 import { redo, undo } from '@codemirror/commands'
 import { Codemirror } from 'vue-codemirror'
+import { sql } from '@codemirror/lang-sql'
+// import { oneDark } from '@codemirror/theme-one-dark'
 
 export default defineComponent({
-  name: 'VueCodemirrorExample',
-  title: 'Web IDE example',
+  name: 'Editor',
+  title: 'SQL dummy runner editor',
   url: import.meta.url,
   components: {
     Codemirror,
@@ -24,14 +26,9 @@ export default defineComponent({
       indentWithTab: true,
       tabSize: 2,
       autofocus: true,
-      height: 'auto',
-      language: 'sql',
+      height: 'calc(55vh - 80px)',
+      language: sql,
     })
-
-    const preview = shallowRef(false)
-    const togglePreview = () => {
-      preview.value = !preview.value
-    }
 
     const cmView = shallowRef<EditorView>()
     const handleReady = ({ view }: any) => {
@@ -82,9 +79,7 @@ export default defineComponent({
     return {
       _code: $code,
       config,
-      preview,
       state,
-      togglePreview,
       handleReady,
       handleStateUpdate,
       handleRedo,
@@ -96,36 +91,9 @@ export default defineComponent({
 
 <template>
   <div class="editor">
-    <div class="main">
-      <Codemirror
-        v-model="_code"
-        :style="{
-          width: preview ? '50%' : '100%',
-          height: config.height,
-          backgroundColor: '#fff',
-          color: '#333',
-        }"
-        placeholder="Please enter the code."
-        :autofocus="config.autofocus"
-        :disabled="config.disabled"
-        :indent-with-tab="config.indentWithTab"
-        :tab-size="config.tabSize"
-        @update="handleStateUpdate"
-        @ready="handleReady"
-      />
-      <pre
-        v-if="preview"
-        class="code"
-        :style="{ height: config.height, width: preview ? '50%' : '0px' }"
-      >{{ code }}</pre>
-    </div>
-    <div class="divider" />
-    <div class="footer">
+    <div flex justify-between items-center style="height: 51px">
+      <h3>SQL</h3>
       <div class="buttons">
-        <button class="item" @click="togglePreview">
-          <span>Preview</span>
-          <i class="iconfont" :class="preview ? 'icon-eye' : 'icon-eye-close'" />
-        </button>
         <button class="item" @click="handleUndo">
           Undo
         </button>
@@ -133,13 +101,32 @@ export default defineComponent({
           Redo
         </button>
       </div>
-      <div class="infos">
-        <span class="item">Spaces: {{ config.tabSize }}</span>
-        <span class="item">Length: {{ state.length }}</span>
-        <span class="item">Lines: {{ state.lines }}</span>
-        <span class="item">Cursor: {{ state.cursor }}</span>
-        <span class="item">Selected: {{ state.selected }}</span>
-      </div>
+    </div>
+    <div class="main">
+      <Codemirror
+        v-model="_code"
+        :style="{
+          width: '100%',
+          height: config.height,
+          backgroundColor: '#fff',
+          color: '#333',
+        }"
+        placeholder="Please enter the code."
+        mode="javascript"
+        :autofocus="config.autofocus"
+        :disabled="config.disabled"
+        :indent-with-tab="config.indentWithTab"
+        :tab-size="config.tabSize"
+        @update="handleStateUpdate"
+        @ready="handleReady"
+      />
+    </div>
+    <div flex justify-end items-center text-xs gap-2 pr-8 style="height: 30px">
+      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Spaces: {{ config.tabSize }}</span>
+      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Length: {{ state.length }}</span>
+      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Lines: {{ state.lines }}</span>
+      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Cursor: {{ state.cursor }}</span>
+      <span h-full flex items-center>Selected: {{ state.selected }}</span>
     </div>
   </div>
 </template>
@@ -165,44 +152,6 @@ export default defineComponent({
         overflow: scroll;
         border-left: 1px solid $border-color;
         font-family: monospace;
-      }
-    }
-
-    .footer {
-      height: 3rem;
-      padding: 0 1em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 90%;
-
-      .buttons {
-        .item {
-          margin-right: 1em;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          background-color: transparent;
-          border: 1px dashed $border-color;
-          font-size: $font-size-small;
-          color: $text-secondary;
-          cursor: pointer;
-          .iconfont {
-            margin-left: $xs-gap;
-          }
-          &:hover {
-            color: $text-color;
-            border-color: $text-color;
-          }
-        }
-      }
-
-      .infos {
-        .item {
-          margin-left: 2em;
-          display: inline-block;
-          font-feature-settings: 'tnum';
-        }
       }
     }
   }
