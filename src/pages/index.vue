@@ -70,11 +70,15 @@ const getRandomOutput = () => {
 
   return { ...randomTable, values: randomTable.values.slice(0, randomId) }
 }
+const randomOutput = ref<DBTable>(getRandomOutput())
+const setRandomOutput = () => {
+  randomOutput.value = getRandomOutput()
+}
 const setViewOutput = (val: boolean) => {
   mViewOutput.value = val
 }
 
-const _code = ref<string>(`SELECT * FROM ${getRandomOutput().name}`)
+const _code = ref<string>(`SELECT * FROM ${randomOutput.value.name}`)
 </script>
 
 <template>
@@ -84,6 +88,7 @@ const _code = ref<string>(`SELECT * FROM ${getRandomOutput().name}`)
         <editor
           language="sql"
           :code="_code"
+          @run-command="setRandomOutput"
         />
       </section>
       <section style="height: 37vh">
@@ -96,11 +101,11 @@ const _code = ref<string>(`SELECT * FROM ${getRandomOutput().name}`)
           </h3>
         </div>
         <div sm:block md:hidden style="height: 31vh" overflow-y-auto px-8 py-4>
-          <the-table v-if="mViewOutput" :data="getRandomOutput()" />
+          <the-table v-if="mViewOutput" :data="randomOutput" />
           <table-list v-else sm:block md:hidden :data="_tables" />
         </div>
         <div sm:hidden md:block style="height: 31vh" overflow-y-auto px-8 py-4>
-          <the-table :data="getRandomOutput()" />
+          <the-table :data="randomOutput" />
         </div>
       </section>
     </main>

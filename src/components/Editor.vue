@@ -4,7 +4,6 @@ import type { EditorView, ViewUpdate } from '@codemirror/view'
 import { redo, undo } from '@codemirror/commands'
 import { Codemirror } from 'vue-codemirror'
 import { sql } from '@codemirror/lang-sql'
-// import { oneDark } from '@codemirror/theme-one-dark'
 
 export default defineComponent({
   name: 'Editor',
@@ -19,6 +18,7 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: ['runCommand'],
   setup(props) {
     const $code = shallowRef(props.code)
     const config = reactive({
@@ -104,6 +104,9 @@ export default defineComponent({
             <div i-carbon-redo />
           </button>
         </div>
+        <button p-1 gap-2 flex items-center justify-center icon-btn bg-green-8 text-white px-3 rounded @click="$emit('runCommand')">
+          <div i-carbon-play /> Run
+        </button>
       </div>
     </div>
     <div class="main">
