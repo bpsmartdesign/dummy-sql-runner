@@ -108,8 +108,7 @@ export default defineComponent({
         :style="{
           width: '100%',
           height: config.height,
-          backgroundColor: '#fff',
-          color: '#333',
+          backgroundColor: isDark ? '#1c2130' : '#ffffff',
         }"
         placeholder="Please enter the code."
         mode="javascript"
@@ -122,10 +121,10 @@ export default defineComponent({
       />
     </div>
     <div flex justify-end items-center text-xs gap-2 pr-8 style="height: 30px">
-      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Spaces: {{ config.tabSize }}</span>
-      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Length: {{ state.length }}</span>
-      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Lines: {{ state.lines }}</span>
-      <span border-r border-r-solid border-r-gray-2 pr-2 h-full flex items-center>Cursor: {{ state.cursor }}</span>
+      <span border-r border-r-solid dark:border-r-dark-3 border-r-gray-2 pr-2 h-full flex items-center>Spaces: {{ config.tabSize }}</span>
+      <span border-r border-r-solid dark:border-r-dark-3 border-r-gray-2 pr-2 h-full flex items-center>Length: {{ state.length }}</span>
+      <span border-r border-r-solid dark:border-r-dark-3 border-r-gray-2 pr-2 h-full flex items-center>Lines: {{ state.lines }}</span>
+      <span border-r border-r-solid dark:border-r-dark-3 border-r-gray-2 pr-2 h-full flex items-center>Cursor: {{ state.cursor }}</span>
       <span h-full flex items-center>Selected: {{ state.selected }}</span>
     </div>
   </div>
@@ -154,5 +153,20 @@ export default defineComponent({
         font-family: monospace;
       }
     }
+  }
+</style>
+
+<style lang="scss">
+  .cm-gutters {
+    background: transparent !important;
+    border: none !important;
+
+    * {
+      background: transparent !important;
+    }
+  }
+
+  .cm-activeLine {
+    background-color: transparent !important;
   }
 </style>
