@@ -91,15 +91,19 @@ export default defineComponent({
 
 <template>
   <div class="editor">
-    <div flex justify-between items-center style="height: 51px">
-      <h3>SQL</h3>
-      <div class="buttons">
-        <button class="item" @click="handleUndo">
-          Undo
-        </button>
-        <button class="item" @click="handleRedo">
-          Redo
-        </button>
+    <div flex justify-between items-center style="height: 50px">
+      <h3 h-full text-sm font-medium flex justify-center items-center px-8 :style="{ backgroundColor: isDark ? '#4a1e1e' : '#ffffff' }">
+        Input
+      </h3>
+      <div w-full h-full px-8 gap-2 text-sm flex justify-end items-center border-b border-b-solid dark:border-b-dark-3 border-b-gray-2 border-l border-l-solid dark:border-l-dark-3 border-l-gray-2>
+        <div grid grid-cols-2 gap-1>
+          <button p-1 flex items-center justify-center icon-btn border dark:border-solid dark:border-gray-6 dark:text-gray-6 hover:dark-bg-gray-5 hover:text-dark-9 rounded @click="handleUndo">
+            <div i-carbon-undo />
+          </button>
+          <button p-1 flex items-center justify-center icon-btn border dark:border-solid dark:border-gray-6 dark:text-gray-6 hover:dark-bg-gray-5 hover:text-dark-9 rounded @click="handleRedo">
+            <div i-carbon-redo />
+          </button>
+        </div>
       </div>
     </div>
     <div class="main">
@@ -108,7 +112,7 @@ export default defineComponent({
         :style="{
           width: '100%',
           height: config.height,
-          backgroundColor: isDark ? '#1c2130' : '#ffffff',
+          backgroundColor: isDark ? '#4a1e1e' : '#ffffff',
         }"
         placeholder="Please enter the code."
         mode="javascript"

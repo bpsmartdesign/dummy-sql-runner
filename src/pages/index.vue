@@ -64,7 +64,6 @@ const _tables = ref<DBTable[]>([
 ])
 
 const mViewOutput = ref<boolean>(true)
-const _code = ref<string>('SELECT * FROM test')
 const getRandomOutput = () => {
   const randomTable = _tables.value[~~(Math.random() * _tables.value.length)]
   const randomId = ~~(Math.random() * (randomTable.values.length)) + 1
@@ -74,6 +73,8 @@ const getRandomOutput = () => {
 const setViewOutput = (val: boolean) => {
   mViewOutput.value = val
 }
+
+const _code = ref<string>(`SELECT * FROM ${getRandomOutput().name}`)
 </script>
 
 <template>
