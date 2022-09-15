@@ -63,7 +63,11 @@ const _tables = ref<DBTable[]>([
   },
 ])
 
+const mViewOutput = ref<boolean>(true)
 const getRandomTable = () => _tables.value[~~(Math.random() * _tables.value.length)]
+const setViewOutput = (val: boolean) => {
+  mViewOutput.value = val
+}
 </script>
 
 <template>
@@ -74,16 +78,19 @@ const getRandomTable = () => _tables.value[~~(Math.random() * _tables.value.leng
       </section>
       <section style="height: 37vh">
         <div flex h-full items-center gap-8 px-8 py-4 dark:border-b-dark-3 border-b-gray-2 border-b border-b-solid style="height: 6vh">
-          <h3 cursor-pointer hover:border-b-solid hover:border-b>
+          <h3 cursor-pointer hover:border-b-solid hover:border-b @click="setViewOutput(true)">
             Output
           </h3>
-          <h3 sm:block md:hidden cursor-pointer hover:border-b-solid hover:border-b>
+          <h3 sm:block md:hidden cursor-pointer hover:border-b-solid hover:border-b @click="setViewOutput(false)">
             Current Tables
           </h3>
         </div>
-        <div style="height: 31vh" overflow-y-auto px-8 py-4>
+        <div sm:block md:hidden style="height: 31vh" overflow-y-auto px-8 py-4>
+          <the-table v-if="mViewOutput" :data="getRandomTable()" />
+          <table-list v-else sm:block md:hidden :data="_tables" />
+        </div>
+        <div sm:hidden md:block style="height: 31vh" overflow-y-auto px-8 py-4>
           <the-table :data="getRandomTable()" />
-          <table-list sm:block md:hidden :data="_tables" />
         </div>
       </section>
     </main>
