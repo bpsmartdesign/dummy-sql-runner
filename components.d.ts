@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     Aside: typeof import('./src/components/Aside.vue')['default']
     Counter: typeof import('./src/components/Counter.vue')['default']
     CurrentTable: typeof import('./src/components/CurrentTable.vue')['default']
+    Editor: typeof import('./src/components/Editor.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

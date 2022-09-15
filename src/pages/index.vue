@@ -1,9 +1,5 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { Editor, EditorConfiguration } from 'codemirror'
-import type { CmComponentRef } from 'codemirror-editor-vue3'
-import Codemirror from 'codemirror-editor-vue3'
-import 'codemirror/mode/javascript/javascript.js'
 
 /**
  * The Database column data type.
@@ -68,12 +64,6 @@ const _tables = ref<DBTable[]>([
 ])
 
 const mViewOutput = ref<boolean>(true)
-const code = ref('const ary = []')
-const cmRefDom = ref<CmComponentRef>(null)
-const cminstance = ref<Editor>()
-const cmOptions: EditorConfiguration = {
-  mode: 'javascript',
-}
 
 const getRandomOutput = () => {
   const randomTable = _tables.value[~~(Math.random() * _tables.value.length)]
@@ -91,12 +81,9 @@ const setViewOutput = (val: boolean) => {
     <main sm:w-full h-full class="md:w-3/5">
       <section style="height: 55vh" bg-red-9 text-gray-2 px-8 py-4>
         <h3>Add SQL query</h3>
-        <Codemirror
-          ref="cmRefDom"
-          v-model:value="code"
-          :options="cmOptions"
-          border
-          :height="200"
+        <editor
+          language="sql"
+          code="SELECT * FROM test"
         />
       </section>
       <section style="height: 37vh">
