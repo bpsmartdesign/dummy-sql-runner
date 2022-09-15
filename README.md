@@ -1,10 +1,10 @@
 ## Task - Atlan Frontend Engineer
 
-Create, design and implement a web-based application capable of running SQL queries and displaying the results of said query. The application must include a space which accepts SQL queries in the form of user inputs, then runs the given query, and displays the result within the application..
+Create, design and implement a web-based application capable of running SQL queries...
 
 <img src="./src/assets/imgs/dummy-sql-runnner.png" alt="Dummy SQL runner" />
 <p align='center'><em>Simple Dummy SQL runner</em></p>
-<h6 align='center'><a href="https://bpsmartdesign.dummy-sql.netlify.app/">Live Demo</a></h6>
+<h6 align='center'><a href="https://dummy-sql-runner.netlify.app/">Live Demo</a></h6>
 
 
 ## Features
