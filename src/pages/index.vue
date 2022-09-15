@@ -90,7 +90,7 @@ const _tables = ref<DBTable[]>([
               </button>
             </div>
           </h3>
-          <div overflow-x-auto>
+          <div v-if="table.tableView" overflow-x-auto>
             <table>
               <thead>
                 <tr>
@@ -107,6 +107,12 @@ const _tables = ref<DBTable[]>([
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div v-else border-l border-l-solid pl-6 relative>
+            <p v-for="head in table.columns" :key="head.label" my-3 text-xs>
+              {{ head.label }}
+              <span text-orange-600>[{{ head.type }}<span v-if="head.length"> ({{ head.length }})</span>]</span>
+            </p>
           </div>
         </div>
       </div>
