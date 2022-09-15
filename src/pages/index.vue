@@ -81,21 +81,50 @@ const _tables = ref<DBTable[]>([
   },
 ])
 
+/**
+ * sync view output or tables on small screens
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
 const mViewOutput = ref<boolean>(true)
+
+/**
+ * Set the current view
+ * @param {boolean} string the new mViewOutput value
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
+const setViewOutput = (val: boolean) => {
+  mViewOutput.value = val
+}
+
+/**
+ * Randomly return a custom output
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
 const getRandomOutput = () => {
   const randomTable = _tables.value[~~(Math.random() * _tables.value.length)]
   const randomId = ~~(Math.random() * (randomTable.values.length)) + 1
 
   return { ...randomTable, values: randomTable.values.slice(0, randomId) }
 }
+
+/**
+ * The random sql output
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
 const randomOutput = ref<DBTable>(getRandomOutput())
+
+/**
+ * Set the random output
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
 const setRandomOutput = () => {
   randomOutput.value = getRandomOutput()
 }
-const setViewOutput = (val: boolean) => {
-  mViewOutput.value = val
-}
 
+/**
+ * The current code editor content
+ * @author BIYA Paul <bpsmartdesign@hotmail.com>
+ */
 const _code = ref<string>(`SELECT * FROM ${randomOutput.value.name}`)
 </script>
 
