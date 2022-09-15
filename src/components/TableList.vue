@@ -13,9 +13,7 @@ const props = withDefaults(defineProps<AsideProps>(), {
 </script>
 
 <template>
-  <div px-8 py-4>
-    <div v-for="table in props.data" :key="table.name" mb-8>
-      <the-table :data="table" />
-    </div>
+  <div v-for="table in props.data" :key="table.name" mb-8>
+    <the-table :data="table" />
   </div>
 </template>

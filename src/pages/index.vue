@@ -91,7 +91,9 @@ const getRandomTable = () => _tables.value[~~(Math.random() * _tables.value.leng
       <h1 dark:bg-dark-4 font-bold px-8 py-3>
         Current Tables
       </h1>
-      <table-list :data="_tables" />
+      <div px-8 py-4>
+        <table-list :data="_tables" />
+      </div>
     </aside>
   </div>
 </template>
