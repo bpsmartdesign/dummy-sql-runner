@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@codemirror/lang-sql": "^6.3.0",
+    "@codemirror/theme-one-dark": "^6.1.0",
     "@vueuse/core": "^9.2.0",
     "codemirror": "^6.0.1",
     "global": "^4.4.0",
